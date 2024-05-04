@@ -184,14 +184,27 @@ def predict():
         # Pilih 5 data terdekat
         k = 7
         nearest_neighbors = distances[:k]
+        # The line `acuracy =  (1 - (nearest_neighbors[0][1] / sum([distance for _, distance in
+        # nearest_neighbors]))) * 100` is calculating the accuracy percentage based on the nearest
+        # neighbors found during the prediction process.
+        acuracy =  (1 - (nearest_neighbors[0][1] / sum([distance for _, distance in nearest_neighbors]))) * 100
+        print(acuracy) 
+        
+        # This line of code calculates the similarity between the input data and the nearest neighbors
+        # found during the prediction process. Here is a breakdown of the calculation:
+        similarity = (1 - (nearest_neighbors[0][1] / sum([distance for _, distance in nearest_neighbors]))) * 100
+        print(similarity)
+        
 
         # Ambil kelas data terdekat
         predicted_classes = [train_data[i]['word'] for i, _ in nearest_neighbors]
+        
 
         if predicted_classes[0] == '1':
-            
-            result = 'benda'
+            class_name = 'benda1'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
+                "class_name": class_name,
                 'result': result,
                 'predicted_classes': predicted_classes,
                 'euclidean_distances':[distance for _, distance in nearest_neighbors],
@@ -203,9 +216,11 @@ def predict():
             # dct_image= 'dct_plot.png'
             
         elif '2' in predicted_classes :
-            result = 'benda2'
+            class_name = 'benda2'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
-           'result': result,
+            "class_name": class_name,
+            'result': result,
             'predicted_classes': predicted_classes,
             'euclidean_distances':[distance for _, distance in nearest_neighbors],
             
@@ -214,9 +229,11 @@ def predict():
             # dct_image= 'dct_plot.png'
             
         elif '3' in predicted_classes :
-            result = 'kerja1'
+            class_name = 'kerja1'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
-           'result': result,
+            "class_name": class_name,
+            'result': result,
             'predicted_classes': predicted_classes,
             'euclidean_distances':[distance for _, distance in nearest_neighbors],
             
@@ -225,8 +242,10 @@ def predict():
             # dct_image= 'dct_plot.png'
             
         elif '4' in predicted_classes :
-            result = 'kerja2'
+            class_name = 'kerja2'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
+            "class_name": class_name,
             'result': result,
             'predicted_classes': predicted_classes,
             'euclidean_distances':[distance for _, distance in nearest_neighbors],
@@ -236,8 +255,10 @@ def predict():
             # dct_image= 'dct_plot.png'
             
         elif '5' in predicted_classes :
-            result = 'sifat1'
+            class_name = 'sifat1'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
+            "class_name": class_name,
             'result': result,
             'predicted_classes': predicted_classes,
             'euclidean_distances':[distance for _, distance in nearest_neighbors],
@@ -246,9 +267,11 @@ def predict():
             }}, message="Sucses!")
             # dct_image= 'dct_plot.png'
         elif '6' in predicted_classes :
-            result = 'sifat2'
+            class_name = 'sifat2'
+            result = similarity
             return ResponseHandler.custom_success_response(status=HTTPStatus.OK, data={'data': {
-           'result': result,
+            "class_name": class_name,
+            'result': result,
             'predicted_classes': predicted_classes,
             'euclidean_distances':[distance for _, distance in nearest_neighbors],
             
